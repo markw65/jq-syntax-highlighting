@@ -54,7 +54,7 @@
 						"name": "punctuation"
 					}
 				},
-				"contentName": "meta.embedded.source.jq",
+				"name": "punctuation",
 				"patterns": [
 					{
 						"include": "$self"
@@ -71,19 +71,29 @@
 		"strings": {
 			"name": "string.quoted.double",
 			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.jq"
+				}
+			},
 			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.jq"
+				}
+			},
 			"patterns": [
 				{
 					"begin": "\\\\\\(",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation"
+							"name": "string.interpolation.begin.jq"
 						}
 					},
 					"end": "\\)",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation"
+							"name": "string.interpolation.end.jq"
 						}
 					},
 					"contentName": "meta.embedded.source.jq",
@@ -93,7 +103,10 @@
 						}
 					]
 				}, {
-					"name": "constant.character.escape",
+					"name": "constant.character.escape.jq",
+					"match": "\\\\([bfnrt\"\\\\/]|u[0-9a-fA-F]{4})"
+				}, {
+					"name": "invalid.illegal.unrecognized-string-escape.jq",
 					"match": "\\\\."
 				}
 			]
